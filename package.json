@@ -13,11 +13,14 @@
     "lint": "oxlint . --deny-warnings",
     "line:fix": "oxlint . --fix",
     "build:core": "bun run --filter @neeraj_jangir/sendkit-core build",
-    "build:cli": "bun run --filter @neeraj_jangir/sendkit-cli build",
+    "build:cli": "bun run --filter @neeraj_jangir/sendkit build",
     "build:local-mcp": "bun run --filter @neeraj_jangir/sendkit-mcp build",
     "dev:cli": "bun run packages/cli/src/index.ts",
     "dev:local-mcp": "bun run packages/local-mcp/src/index.ts",
     "dev:remote-mcp": "bun run apps/remote-mcp/src/index.ts",
+    "release:pack:core": "bun run --filter @neeraj_jangir/sendkit-core pack:dry",
+    "release:pack:cli": "bun run --filter @neeraj_jangir/sendkit pack:dry",
+    "release:pack:local-mcp": "bun run --filter @neeraj_jangir/sendkit-mcp pack:dry",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
