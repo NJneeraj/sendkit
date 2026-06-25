@@ -1,21 +1,30 @@
 {
   "name": "sendkit-workspace",
   "private": true,
-  "type": "module",
   "workspaces": [
     "packages/*",
     "apps/*"
   ],
+  "type": "module",
+  "module": "index.ts",
   "scripts": {
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint . --deny-warnings",
+    "line:fix": "oxlint . --fix",
     "dev:cli": "bun run packages/cli/src/index.ts",
     "dev:local-mcp": "bun run packages/local-mcp/src/index.ts",
-    "dev:remote-mcp": "bun run apps/remote-mcp/src/index.ts"
+    "dev:remote-mcp": "bun run apps/remote-mcp/src/index.ts",
+    "typecheck": "tsc --noEmit"
   },
-  "module": "index.ts",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/node": "^26.0.1",
+    "oxfmt": "^0.56.0",
+    "oxlint": "^1.71.0",
+    "tsdown": "^0.22.3"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^6.0.3"
   }
 }

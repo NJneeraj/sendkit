@@ -56,15 +56,14 @@ function createServer(botToken: string) {
 const app = new Hono();
 
 function protectedResourceMetadataUrl(c: Context, botToken: string) {
-  return new URL(
-    `/.well-known/oauth-protected-resource/${botToken}/mcp`,
-    c.req.url,
-  ).toString();
+  return new URL(`/.well-known/oauth-protected-resource/${botToken}/mcp`, c.req.url).toString();
 }
 
 function unauthorizedMcpResource(c: Context, botToken: string) {
-  (c.header("WWW-Authenticate"),
-    `Bearer resource_metadata="${protectedResourceMetadataUrl(c, botToken)}"`);
+  c.header(
+    "WWW-Authenticate",
+    `Bearer resource_metadata="${protectedResourceMetadataUrl(c, botToken)}"`,
+  );
   return c.json({ error: "Unauthorized" }, 401);
 }
 
@@ -72,10 +71,7 @@ app.get("/.well-known/oauth-protected-resource/:botToken/mcp", (c) => {
   return c.json(
     generateClerkProtectedResourceMetadata({
       publishableKey: clerkPublishableKey,
-      resourceUrl: new URL(
-        `/${c.req.param("botToken")}/mcp`,
-        c.req.url,
-      ).toString(),
+      resourceUrl: new URL(`/${c.req.param("botToken")}/mcp`, c.req.url).toString(),
     }),
   );
 });
@@ -94,7 +90,7 @@ app.post("/:botToken/mcp", async (c) => {
     if (!requestState.isAuthenticated) {
       return unauthorizedMcpResource(c, botToken);
     }
-  } catch (error) {
+  } catch {
     return unauthorizedMcpResource(c, botToken);
   }
 
