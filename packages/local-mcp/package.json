@@ -1,13 +1,13 @@
 {
   "name": "@neeraj_jangir/sendkit-mcp",
   "version": "0.0.0",
-  "type": "module",
   "bin": {
     "sendkit-mcp": "./dist/index.js"
   },
   "files": [
     "dist"
   ],
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
